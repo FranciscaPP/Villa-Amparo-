@@ -1,0 +1,24 @@
+{
+  "name": "villa-amparo",
+  "version": "1.0.0",
+  "description": "Videojuego educativo para niños de 5 a 8 años",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.184.0",
+    "zustand": "^5.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^6.0.3"
+  }
+}

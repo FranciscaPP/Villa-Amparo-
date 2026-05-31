@@ -8,6 +8,7 @@ import { LetterForest } from './pages/LetterForest.jsx'
 import { LetterMinigame } from './pages/LetterMinigame.jsx'
 import { RewardScreen } from './pages/RewardScreen.jsx'
 import { HomeView } from './pages/HomeView.jsx'
+import { BackButton } from './components/BackButton.jsx'
 
 export default function App() {
   const screen = useGameStore(s => s.screen)
@@ -26,6 +27,7 @@ export default function App() {
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', fontFamily: 'Nunito, sans-serif' }}>
       {screens[screen] || <SplashScreen />}
+      <BackButton />
     </div>
   )
 }

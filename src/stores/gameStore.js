@@ -8,9 +8,11 @@ export const useGameStore = create((set, get) => ({
   // Player data
   player: {
     name: '',
-    skinTone: '#FDBCB4',
+    skinTone: '#FFDABB',
     hairColor: '#4A2800',
     hairStyle: 'short',
+    clothesColor: '#4A90D9',
+    hatStyle: 'none',
     petType: 'cat',
     petName: 'Naranjo',
   },

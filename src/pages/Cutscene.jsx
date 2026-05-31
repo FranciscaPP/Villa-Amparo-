@@ -27,7 +27,7 @@ function VillageShape() {
       </div>
       {/* House 3 */}
       <div style={{ position: 'absolute', bottom: '30px', right: '20px' }}>
-        <div style={{ width: '0', height: '0', borderLeft: '28px solid transparent', borderRight: '28px solid transparent', borderBottom: '28px solid '#4ECDC4'', marginBottom: '-2px' }} />
+        <div style={{ width: '0', height: '0', borderLeft: '28px solid transparent', borderRight: '28px solid transparent', borderBottom: '28px solid #4ECDC4', marginBottom: '-2px' }} />
         <div style={{ width: '56px', height: '45px', background: '#E8F8FF', border: '2px solid #ddd' }}>
           <div style={{ width: '14px', height: '20px', background: '#2980B9', margin: '12px auto 0' }} />
         </div>

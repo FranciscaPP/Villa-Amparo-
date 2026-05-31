@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Sky, Text } from '@react-three/drei'
+import { Sky } from '@react-three/drei'
 import { useGameStore } from '../stores/gameStore.js'
 import { RobloxCharacter } from '../components/RobloxCharacter.jsx'
-import { HUD } from '../components/HUD.jsx'
 import { useVoice } from '../hooks/useVoice.js'
 import * as THREE from 'three'
 

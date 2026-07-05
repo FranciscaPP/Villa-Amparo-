@@ -1,28 +1,40 @@
-# Villa Amparo 🏡⭐
+# Villa Amparo 🏘️
 
-Juego educativo mobile-first para aprender a leer y escribir en español, con la
-forma de un juego de exploración 3D tipo obby: un pueblito mágico, un avatar que
-camina libre, personajes tiernos que entregan misiones, y recompensas —donde cada
-misión es una actividad de lectoescritura disfrazada de juego.
+Mundo abierto 3D estilo Roblox/Brookhaven para que Amparo aprenda a leer y
+escribir jugando: explora la ciudad, personaliza su avatar, maneja su auto y
+cumple misiones educativas con los personajes — todo guiado por voz.
 
-**Stack elegido:** Web con React Three Fiber (PWA para Android). Ver el análisis
-completo en la documentación de diseño.
+**Jugar:** https://franciscapp.github.io/Villa-Amparo-/
 
-## Documentación de diseño
+## Qué hay en la ciudad
 
-| Documento | Contenido |
+| Lugar | Qué se hace |
 |---|---|
-| [00 — Visión y stack](docs/00-vision-y-stack.md) | Análisis de React Native vs. Web/R3F vs. Unity, recomendación y riesgos |
-| [01 — Arquitectura](docs/01-arquitectura.md) | Capas 3D/2D, estructura de carpetas, flujo de juego, sistema de voz, controles |
-| [02 — Gameplay y mapa](docs/02-gameplay-y-mapa.md) | Fantasía, loop de juego, personajes y primer mapa de Villa Amparo |
-| [03 — Misiones educativas](docs/03-misiones-educativas.md) | Base pedagógica, catálogo de 8 minijuegos, dificultad adaptativa |
-| [04 — Modelo de datos](docs/04-modelo-de-datos.md) | Esquema de progreso, recompensas, modo mamá y persistencia |
-| [05 — Plan MVP](docs/05-plan-mvp.md) | Fases 0–4, qué hacer rápido y qué dejar para después |
+| 🏫 Escuela | Misión con la profesora Pía: escucha la palabra y elige su letra inicial |
+| 📚 Biblioteca | Misión con Beti: encuentra los libros que empiezan con una letra |
+| 🏠 Mi casa | (Próximamente: decorar por dentro) |
+| 🛒 Tienda | (Próximamente: comprar leyendo los nombres) |
+| ☕ Cafetería · 🌳 Parque | Lugares para explorar, todos narrados por voz |
+| 🚗 Auto rosado | Súbete y maneja por las calles |
 
-## Principios del producto
+## Cómo se juega
 
-- Muy visual, letras y botones grandes, sin textos largos.
-- Todo guiado por voz: instrucciones habladas, personajes que hablan, refuerzo positivo.
-- Parece juego, no tarea: humor, colores, premios y personajes tiernos.
-- Nunca hay "game over": equivocarse da una pista y otra oportunidad.
-- $0 en infraestructura: sin backend, sin cuentas, funciona offline.
+- **Arrastra el dedo** en cualquier parte para caminar (o manejar).
+- **Toca cualquier cosa** — casas, autos, personas, árboles — y la voz dice
+  qué es y para qué sirve.
+- **🧍 AVATAR**: personaliza piel, peinado, colores de pelo, polera, pantalón
+  y accesorios; guarda tus looks favoritos.
+- Acércate a los personajes con ❗ y toca **💬 HABLAR** para jugar su misión.
+- Las misiones nunca se pierden: equivocarse da pistas y otra oportunidad.
+- Estrellas ⭐ y monedas 🪙 se guardan en el dispositivo.
+
+## Stack
+
+Vite + React + TypeScript · React Three Fiber (3D) · Zustand (estado persistente)
+· Web Speech API (voz en español) · PWA-friendly · Deploy en GitHub Pages.
+
+```bash
+npm install
+npm run dev        # desarrollo
+npm run build      # producción (dist/)
+```

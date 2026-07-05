@@ -18,10 +18,11 @@ export interface VoiceStyle {
   rate?: number;
 }
 
-// Voz de Doña Búho: lenta y grave.
-export const BUHO: VoiceStyle = { pitch: 0.8, rate: 0.82 };
+export const NARRADOR: VoiceStyle = { pitch: 1.05, rate: 0.92 };
+export const PROFE: VoiceStyle = { pitch: 1.15, rate: 0.88 };
+export const BIBLIO: VoiceStyle = { pitch: 0.95, rate: 0.85 };
 
-export function speak(text: string, style: VoiceStyle = {}): Promise<void> {
+export function speak(text: string, style: VoiceStyle = NARRADOR): Promise<void> {
   return new Promise((resolve) => {
     if (!('speechSynthesis' in window)) {
       resolve();
@@ -31,7 +32,7 @@ export function speak(text: string, style: VoiceStyle = {}): Promise<void> {
     if (esVoice) u.voice = esVoice;
     u.lang = esVoice?.lang ?? 'es-ES';
     u.pitch = style.pitch ?? 1.05;
-    u.rate = style.rate ?? 0.9;
+    u.rate = style.rate ?? 0.92;
     let done = false;
     const finish = () => {
       if (!done) {
@@ -42,13 +43,18 @@ export function speak(text: string, style: VoiceStyle = {}): Promise<void> {
     u.onend = finish;
     u.onerror = finish;
     window.speechSynthesis.speak(u);
-    // Red de seguridad: algunos Android no disparan onend.
     setTimeout(finish, Math.max(2500, text.length * 130));
   });
 }
 
 export function stopSpeaking() {
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+/** Narra un lugar/objeto al tocarlo: primero cancela lo anterior. */
+export function narrate(text: string, style: VoiceStyle = NARRADOR) {
+  stopSpeaking();
+  speak(text, style);
 }
 
 const PRAISE = [

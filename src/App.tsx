@@ -2,9 +2,15 @@ import { useGame } from './state';
 import { speak } from './voice';
 import WorldScreen from './world/WorldScreen';
 import CazaLetras from './missions/CazaLetras';
+import CharacterShowcase from './world/CharacterShowcase';
 
 export default function App() {
   const screen = useGame((s) => s.screen);
+
+  // Vitrina de personajes para revisar diseño: /?personajes
+  if (new URLSearchParams(window.location.search).has('personajes')) {
+    return <CharacterShowcase />;
+  }
 
   if (screen === 'home') return <Home />;
   if (screen === 'mission') return <CazaLetras />;

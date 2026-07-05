@@ -1,22 +1,34 @@
 import { Canvas } from '@react-three/fiber';
 import { useGame } from '../state';
-import { speak, BUHO } from '../voice';
+import { speak } from '../voice';
 import Hud from '../ui/Hud';
 import Joystick from '../ui/Joystick';
 import Village from './Village';
 import Avatar from './Avatar';
-import Owl, { OWL_POSITION } from './Owl';
+import { NPCS } from './npcs';
+import { OwlModel, FrogModel, TomatoModel, ToucanModel } from './NpcModels';
+
+const MODELS: Record<string, typeof OwlModel> = {
+  buho: OwlModel,
+  rana: FrogModel,
+  tomate: TomatoModel,
+  coco: ToucanModel,
+};
 
 export default function WorldScreen() {
   const nearNpc = useGame((s) => s.nearNpc);
-  const setScreen = useGame((s) => s.setScreen);
+  const startMission = useGame((s) => s.startMission);
+  const npc = NPCS.find((n) => n.id === nearNpc);
 
   const talk = () => {
-    speak(
-      '¡Hola! Soy Doña Búho. ¡Las vocales se escaparon en globos! ¿Me ayudas a atraparlas?',
-      BUHO
-    );
-    setScreen('mission');
+    if (!npc) return;
+    speak(npc.intro, npc.voice);
+    if (npc.mission === 'vocales') {
+      startMission(npc.mission);
+    } else {
+      // Los demás minijuegos vienen en camino
+      speak('¡Mi juego estará listo muy pronto! ¡Vuelve a visitarme!', npc.voice);
+    }
   };
 
   return (
@@ -31,12 +43,15 @@ export default function WorldScreen() {
         <ambientLight intensity={0.9} />
         <directionalLight position={[8, 15, 5]} intensity={1.1} />
         <Village />
-        <Owl />
-        <Avatar npcPosition={OWL_POSITION} />
+        {NPCS.map((n) => {
+          const Model = MODELS[n.id];
+          return <Model key={n.id} position={n.position} />;
+        })}
+        <Avatar />
       </Canvas>
       <Hud />
       <Joystick />
-      {nearNpc && (
+      {npc && (
         <button className="talk-btn" onPointerDown={(e) => e.stopPropagation()} onClick={talk}>
           💬 HABLAR
         </button>

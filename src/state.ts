@@ -2,32 +2,47 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export type Screen = 'home' | 'world' | 'mission';
+export type MissionId = 'vocales' | 'silabas' | 'parejas' | 'completar';
 
 interface GameState {
   screen: Screen;
+  activeMission: MissionId | null;
   stars: number;
   coins: number;
-  nearNpc: boolean;
+  progress: Record<MissionId, number>; // misiones completadas por tipo
+  nearNpc: string | null;              // id del NPC cercano
   setScreen: (s: Screen) => void;
-  addRewards: (stars: number, coins: number) => void;
-  setNearNpc: (v: boolean) => void;
+  startMission: (m: MissionId) => void;
+  finishMission: (m: MissionId, stars: number, coins: number) => void;
+  setNearNpc: (id: string | null) => void;
 }
 
 export const useGame = create<GameState>()(
   persist(
     (set) => ({
       screen: 'home',
+      activeMission: null,
       stars: 0,
       coins: 0,
-      nearNpc: false,
-      setScreen: (screen) => set({ screen }),
-      addRewards: (s, c) =>
-        set((st) => ({ stars: st.stars + s, coins: st.coins + c })),
+      progress: { vocales: 0, silabas: 0, parejas: 0, completar: 0 },
+      nearNpc: null,
+      setScreen: (screen) =>
+        set((st) => ({
+          screen,
+          activeMission: screen === 'mission' ? st.activeMission : null,
+        })),
+      startMission: (m) => set({ screen: 'mission', activeMission: m }),
+      finishMission: (m, s, c) =>
+        set((st) => ({
+          stars: st.stars + s,
+          coins: st.coins + c,
+          progress: { ...st.progress, [m]: (st.progress[m] ?? 0) + 1 },
+        })),
       setNearNpc: (nearNpc) => set({ nearNpc }),
     }),
     {
       name: 'villa-amparo',
-      partialize: (s) => ({ stars: s.stars, coins: s.coins }),
+      partialize: (s) => ({ stars: s.stars, coins: s.coins, progress: s.progress }),
     }
   )
 );

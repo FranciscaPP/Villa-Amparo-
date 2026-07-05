@@ -19,7 +19,7 @@ type BalloonFx = 'none' | 'popped' | 'wrong-shake';
 
 export default function CazaLetras() {
   const setScreen = useGame((s) => s.setScreen);
-  const addRewards = useGame((s) => s.addRewards);
+  const finishMission = useGame((s) => s.finishMission);
 
   // Los 5 objetivos son las 5 vocales en orden aleatorio.
   const targets = useRef<string[]>(shuffle(VOWELS));
@@ -66,7 +66,7 @@ export default function CazaLetras() {
   const finish = () => {
     const ok = firstTries.current;
     const stars = ok >= 5 ? 3 : ok >= 3 ? 2 : 1;
-    addRewards(stars, 5);
+    finishMission('vocales', stars, 5);
     setDone(true);
     speak(
       `¡Lo hiciste increíble! Ganaste ${stars === 1 ? 'una estrella' : `${stars} estrellas`} y cinco monedas. ¡Gracias por atrapar mis vocales!`,
